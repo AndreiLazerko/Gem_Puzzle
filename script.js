@@ -188,7 +188,7 @@ class Game {
 
     // Render message
     if(status === 'won'){
-      document.querySelector('.message').textContent = 'You WIN! COOL!!!;
+      document.querySelector('.message').textContent = 'You WIN! COOL!!!';
     } else {
       document.querySelector('.message').textContent = '';
     }
