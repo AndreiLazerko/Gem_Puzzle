@@ -1,9 +1,20 @@
+const moveAudio = new Audio('audio/puzzle.mp3');
+
+
 class Box {
   constructor(x, y){
     this.x = x;
     this.y = y;
   }
-
+  // document.addEventListener('keydown', function(e){
+  //   switch(e.keyCode){
+  //     case 38:this.getTopBox(); break;
+  //     case 40:this.getBottomBox(); break;
+  //     case 37:this.getLeftBox(); break;
+  //     case 39:this.getLeftBox(); break;
+  //   }
+    
+  // });
   getTopBox(){
     if(this.y === 0) return null;
     return new Box(this.x, this.y - 1)
@@ -42,7 +53,9 @@ const swapBoxes = (grid, box1, box2) => {
   const temp = grid[box1.y][box1.x];
   grid[box1.y][box1.x] = grid[box2.y][box2.x];
   grid[box2.y][box2.x] = temp;
+  moveAudio.play(); 
 }
+
 
 const isSolved = grid => {
   return (
@@ -167,7 +180,6 @@ class Game {
       }
     }
     document.querySelector('.grid').replaceWith(newGrid);
-
     // Render button
     const newButton = document.createElement('button');
     if (status === 'ready') newButton.textContent = 'Play';
@@ -177,6 +189,7 @@ class Game {
       clearInterval(this.tickId);
       this.tickId = setInterval(this.tick, 1000);
       this.setState(State.start());
+      
     });
     document.querySelector('.footer button').replaceWith(newButton);
 
@@ -188,7 +201,7 @@ class Game {
 
     // Render message
     if(status === 'won'){
-      document.querySelector('.message').textContent = 'You WIN! COOL!!!';
+      document.querySelector('.message').textContent = 'You WIN! COOL!!!' +`Move: ${move}` + 'and ' + `Time: ${time}`;
     } else {
       document.querySelector('.message').textContent = '';
     }
