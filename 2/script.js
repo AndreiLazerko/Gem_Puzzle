@@ -1,4 +1,4 @@
-const moveAudio = new Audio('audio/puzzle.mp3');
+const moveAudio = new Audio('../audio/puzzle.mp3');
 
 
 class Box {
@@ -21,12 +21,12 @@ class Box {
   }
 
   getRightBox(){
-    if(this.x === 3) return null;
+    if(this.x === 2) return null;
     return new Box(this.x + 1, this.y)
   }
 
   getBottomBox(){
-    if(this.y === 3) return null;
+    if(this.y === 2) return null;
     return new Box(this.x, this.y + 1)
   }
 
@@ -62,27 +62,20 @@ const isSolved = grid => {
     grid[0][0] === 1 &&
     grid[0][1] === 2 &&
     grid[0][2] === 3 &&
-    grid[0][3] === 4 &&
-    grid[1][0] === 5 &&
-    grid[1][1] === 6 &&
-    grid[1][2] === 7 &&
-    grid[1][3] === 8 &&
-    grid[2][0] === 9 &&
-    grid[2][1] === 10 &&
-    grid[2][2] === 11 &&
-    grid[2][3] === 12 &&
-    grid[3][0] === 13 &&
-    grid[3][1] === 14 &&
-    grid[3][2] === 15 &&
-    grid[3][3] === 0
+    grid[1][0] === 4 &&
+    grid[1][1] === 5 &&
+    grid[1][2] === 6 &&
+    grid[2][0] === 7 &&
+    grid[2][1] === 8 &&
+    grid[2][2] === 0
   );
 }
 
 const getRandomGrid = () => {
-  let grid = [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 0]];
+  let grid = [[1, 2, 3], [4, 5, 6], [7, 8, 0]];
 
   // SH
-  let blankBox = new Box(3, 3);
+  let blankBox = new Box(2, 2);
   for (let i = 0; i < 1000; i++){
     const randomNextdoorBox = blankBox.getRandomNextdoorBox();
     swapBoxes(grid, blankBox, randomNextdoorBox);
@@ -102,7 +95,7 @@ class State {
   }
   static ready(){
     return new State(
-      [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]],
+      [[0, 0, 0], [0, 0, 0], [0, 0, 0]],
       0,
       0,
       'ready'
@@ -167,8 +160,8 @@ class Game {
     // Render grid
     const newGrid = document.createElement('div');
     newGrid.className = 'grid';
-    for (let i = 0; i < 4; i++) {
-      for (let j = 0; j < 4; j++) {
+    for (let i = 0; i < 3; i++) {
+      for (let j = 0; j < 3; j++) {
         const button = document.createElement('button');
 
         if(status === 'playing') {
