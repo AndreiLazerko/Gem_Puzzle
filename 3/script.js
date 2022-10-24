@@ -1,4 +1,4 @@
-const moveAudio = new Audio('audio/puzzle.mp3');
+const moveAudio = new Audio('../audio/puzzle.mp3');
 
 
 class Box {
@@ -21,12 +21,12 @@ class Box {
   }
 
   getRightBox(){
-    if(this.x === 3) return null;
+    if(this.x === 4) return null;
     return new Box(this.x + 1, this.y)
   }
 
   getBottomBox(){
-    if(this.y === 3) return null;
+    if(this.y === 4) return null;
     return new Box(this.x, this.y + 1)
   }
 
@@ -63,26 +63,35 @@ const isSolved = grid => {
     grid[0][1] === 2 &&
     grid[0][2] === 3 &&
     grid[0][3] === 4 &&
-    grid[1][0] === 5 &&
-    grid[1][1] === 6 &&
-    grid[1][2] === 7 &&
-    grid[1][3] === 8 &&
-    grid[2][0] === 9 &&
-    grid[2][1] === 10 &&
-    grid[2][2] === 11 &&
-    grid[2][3] === 12 &&
-    grid[3][0] === 13 &&
-    grid[3][1] === 14 &&
-    grid[3][2] === 15 &&
-    grid[3][3] === 0
+    grid[0][4] === 5 &&
+    grid[1][0] === 6 &&
+    grid[1][1] === 7 &&
+    grid[1][2] === 8 &&
+    grid[1][3] === 9 &&
+    grid[1][4] === 10 &&
+    grid[2][0] === 11 &&
+    grid[2][1] === 12 &&
+    grid[2][2] === 13 &&
+    grid[2][3] === 14 &&
+    grid[2][4] === 15 &&
+    grid[3][0] === 16 &&
+    grid[3][1] === 17 &&
+    grid[3][2] === 18 &&
+    grid[3][3] === 19 &&
+    grid[3][4] === 20 &&
+    grid[4][0] === 21 &&
+    grid[4][1] === 22 &&
+    grid[4][2] === 23 &&
+    grid[4][3] === 24 &&
+    grid[4][4] === 0
   );
 }
 
 const getRandomGrid = () => {
-  let grid = [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 0]];
+  let grid = [[1, 2, 3, 4, 5], [6, 7, 8, 9, 10], [11, 12, 13, 14, 15], [16, 17, 18, 19, 20], [21, 22, 23, 24, 0]];
 
   // SH
-  let blankBox = new Box(3, 3);
+  let blankBox = new Box(4, 4);
   for (let i = 0; i < 1000; i++){
     const randomNextdoorBox = blankBox.getRandomNextdoorBox();
     swapBoxes(grid, blankBox, randomNextdoorBox);
@@ -102,7 +111,7 @@ class State {
   }
   static ready(){
     return new State(
-      [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]],
+      [[0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0]],
       0,
       0,
       'ready'
@@ -167,8 +176,8 @@ class Game {
     // Render grid
     const newGrid = document.createElement('div');
     newGrid.className = 'grid';
-    for (let i = 0; i < 4; i++) {
-      for (let j = 0; j < 4; j++) {
+    for (let i = 0; i < 5; i++) {
+      for (let j = 0; j < 5; j++) {
         const button = document.createElement('button');
 
         if(status === 'playing') {

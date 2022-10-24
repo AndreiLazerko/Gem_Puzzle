@@ -22,8 +22,8 @@ body{
 
 .grid{
   display: grid;
-  grid-template-columns: 80px 80px 80px 80px;
-  grid-template-rows: 80px 80px 80px 80px;
+  grid-template-columns: 80px 80px 80px 80px 80px;
+  grid-template-rows: 80px 80px 80px 80px 80px;
   border: 1px solid #550000;
 }
 
